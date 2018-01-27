@@ -40,6 +40,9 @@ type Interface interface {
 	PreferencesGetter
 	ClusterLoggingsGetter
 	ProjectLoggingsGetter
+	NotifiersGetter
+	ClusterAlertsGetter
+	ProjectAlertsGetter
 	ListenConfigsGetter
 	SettingsGetter
 }
@@ -75,6 +78,9 @@ type Client struct {
 	preferenceControllers                 map[string]PreferenceController
 	clusterLoggingControllers             map[string]ClusterLoggingController
 	projectLoggingControllers             map[string]ProjectLoggingController
+	notifierControllers                   map[string]NotifierController
+	clusterAlertControllers               map[string]ClusterAlertController
+	projectAlertControllers               map[string]ProjectAlertController
 	listenConfigControllers               map[string]ListenConfigController
 	settingControllers                    map[string]SettingController
 }
@@ -119,6 +125,9 @@ func NewForConfig(config rest.Config) (Interface, error) {
 		preferenceControllers:                 map[string]PreferenceController{},
 		clusterLoggingControllers:             map[string]ClusterLoggingController{},
 		projectLoggingControllers:             map[string]ProjectLoggingController{},
+		notifierControllers:                   map[string]NotifierController{},
+		clusterAlertControllers:               map[string]ClusterAlertController{},
+		projectAlertControllers:               map[string]ProjectAlertController{},
 		listenConfigControllers:               map[string]ListenConfigController{},
 		settingControllers:                    map[string]SettingController{},
 	}, nil
@@ -468,6 +477,45 @@ type ProjectLoggingsGetter interface {
 func (c *Client) ProjectLoggings(namespace string) ProjectLoggingInterface {
 	objectClient := clientbase.NewObjectClient(namespace, c.restClient, &ProjectLoggingResource, ProjectLoggingGroupVersionKind, projectLoggingFactory{})
 	return &projectLoggingClient{
+		ns:           namespace,
+		client:       c,
+		objectClient: objectClient,
+	}
+}
+
+type NotifiersGetter interface {
+	Notifiers(namespace string) NotifierInterface
+}
+
+func (c *Client) Notifiers(namespace string) NotifierInterface {
+	objectClient := clientbase.NewObjectClient(namespace, c.restClient, &NotifierResource, NotifierGroupVersionKind, notifierFactory{})
+	return &notifierClient{
+		ns:           namespace,
+		client:       c,
+		objectClient: objectClient,
+	}
+}
+
+type ClusterAlertsGetter interface {
+	ClusterAlerts(namespace string) ClusterAlertInterface
+}
+
+func (c *Client) ClusterAlerts(namespace string) ClusterAlertInterface {
+	objectClient := clientbase.NewObjectClient(namespace, c.restClient, &ClusterAlertResource, ClusterAlertGroupVersionKind, clusterAlertFactory{})
+	return &clusterAlertClient{
+		ns:           namespace,
+		client:       c,
+		objectClient: objectClient,
+	}
+}
+
+type ProjectAlertsGetter interface {
+	ProjectAlerts(namespace string) ProjectAlertInterface
+}
+
+func (c *Client) ProjectAlerts(namespace string) ProjectAlertInterface {
+	objectClient := clientbase.NewObjectClient(namespace, c.restClient, &ProjectAlertResource, ProjectAlertGroupVersionKind, projectAlertFactory{})
+	return &projectAlertClient{
 		ns:           namespace,
 		client:       c,
 		objectClient: objectClient,

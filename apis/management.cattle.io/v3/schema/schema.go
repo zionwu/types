@@ -30,6 +30,7 @@ var (
 		Init(stackTypes).
 		Init(userTypes).
 		Init(logTypes).
+		Init(alertTypes).
 		Init(globalTypes)
 )
 
@@ -219,4 +220,39 @@ func globalTypes(schema *types.Schemas) *types.Schemas {
 				return f
 			})
 		})
+}
+
+func alertTypes(schema *types.Schemas) *types.Schemas {
+	return schema.
+		AddMapperForType(&Version, &v3.Notifier{},
+			m.DisplayName{}).
+		AddMapperForType(&Version, &v3.ClusterAlert{},
+			m.DisplayName{}).
+		AddMapperForType(&Version, &v3.ProjectAlert{},
+			m.DisplayName{}).
+		MustImportAndCustomize(&Version, v3.Notifier{}, func(schema *types.Schema) {
+			schema.CollectionActions = map[string]types.Action{
+				//Add a message body as input
+				"send": {},
+			}
+		}).
+		MustImportAndCustomize(&Version, v3.ClusterAlert{}, func(schema *types.Schema) {
+
+			schema.ResourceActions = map[string]types.Action{
+				"activate":   {},
+				"deactivate": {},
+				"mute":       {},
+				"unmute":     {},
+			}
+		}).
+		MustImportAndCustomize(&Version, v3.ProjectAlert{}, func(schema *types.Schema) {
+
+			schema.ResourceActions = map[string]types.Action{
+				"activate":   {},
+				"deactivate": {},
+				"mute":       {},
+				"unmute":     {},
+			}
+		})
+
 }
