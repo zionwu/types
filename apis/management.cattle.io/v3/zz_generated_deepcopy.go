@@ -1016,24 +1016,8 @@ func (in *ClusterAlertList) DeepCopyObject() runtime.Object {
 func (in *ClusterAlertSpec) DeepCopyInto(out *ClusterAlertSpec) {
 	*out = *in
 	in.AlertCommonSpec.DeepCopyInto(&out.AlertCommonSpec)
-	if in.TargetNode != nil {
-		in, out := &in.TargetNode, &out.TargetNode
-		if *in == nil {
-			*out = nil
-		} else {
-			*out = new(TargetNode)
-			(*in).DeepCopyInto(*out)
-		}
-	}
-	if in.TargetSystemService != nil {
-		in, out := &in.TargetSystemService, &out.TargetSystemService
-		if *in == nil {
-			*out = nil
-		} else {
-			*out = new(TargetSystemService)
-			**out = **in
-		}
-	}
+	in.TargetNode.DeepCopyInto(&out.TargetNode)
+	out.TargetSystemService = in.TargetSystemService
 	return
 }
 
@@ -3447,24 +3431,8 @@ func (in *ProjectAlertList) DeepCopyObject() runtime.Object {
 func (in *ProjectAlertSpec) DeepCopyInto(out *ProjectAlertSpec) {
 	*out = *in
 	in.AlertCommonSpec.DeepCopyInto(&out.AlertCommonSpec)
-	if in.TargetWorkload != nil {
-		in, out := &in.TargetWorkload, &out.TargetWorkload
-		if *in == nil {
-			*out = nil
-		} else {
-			*out = new(TargetWorkload)
-			(*in).DeepCopyInto(*out)
-		}
-	}
-	if in.TargetPod != nil {
-		in, out := &in.TargetPod, &out.TargetPod
-		if *in == nil {
-			*out = nil
-		} else {
-			*out = new(TargetPod)
-			**out = **in
-		}
-	}
+	in.TargetWorkload.DeepCopyInto(&out.TargetWorkload)
+	out.TargetPod = in.TargetPod
 	return
 }
 

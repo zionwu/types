@@ -36,7 +36,7 @@ type ProjectAlert struct {
 }
 
 type AlertCommonSpec struct {
-	DisplayName           string      `json:"displayName,omitempty"`
+	DisplayName           string      `json:"displayName,omitempty" norman:"required"`
 	Description           string      `json:"description,omitempty"`
 	Severity              string      `json:"severity,omitempty"`
 	RecipientList         []Recipient `json:"recipientList,omitempty"`
@@ -47,17 +47,17 @@ type AlertCommonSpec struct {
 type ClusterAlertSpec struct {
 	AlertCommonSpec
 
-	ClusterName         string               `json:"clusterName" norman:"type=reference[cluster]"`
-	TargetNode          *TargetNode          `json:"targetNode,omitempty"`
-	TargetSystemService *TargetSystemService `json:"targetSystemService,omitempty"`
+	ClusterName         string              `json:"clusterName" norman:"type=reference[cluster]"`
+	TargetNode          TargetNode          `json:"targetNode,omitempty"`
+	TargetSystemService TargetSystemService `json:"targetSystemService,omitempty"`
 }
 
 type ProjectAlertSpec struct {
 	AlertCommonSpec
 
-	ProjectName    string          `json:"projectName" norman:"type=reference[project]"`
-	TargetWorkload *TargetWorkload `json:"targetWorkload,omitempty"`
-	TargetPod      *TargetPod      `json:"targetPod,omitempty"`
+	ProjectName    string         `json:"projectName" norman:"type=reference[project]"`
+	TargetWorkload TargetWorkload `json:"targetWorkload,omitempty"`
+	TargetPod      TargetPod      `json:"targetPod,omitempty"`
 }
 
 type Recipient struct {
@@ -137,7 +137,7 @@ type Notifier struct {
 type NotifierSpec struct {
 	ClusterName string `json:"clusterName" norman:"type=reference[cluster]"`
 
-	DisplayName     string           `json:"displayName,omitempty"`
+	DisplayName     string           `json:"displayName,omitempty" norman:"required"`
 	Description     string           `json:"description,omitempty"`
 	SmtpConfig      *SmtpConfig      `json:"smtpConfig,omitempty"`
 	SlackConfig     *SlackConfig     `json:"slackConfig,omitempty"`
