@@ -39,7 +39,7 @@ type AlertCommonSpec struct {
 	DisplayName           string      `json:"displayName,omitempty" norman:"required"`
 	Description           string      `json:"description,omitempty"`
 	Severity              string      `json:"severity,omitempty" norman:"required,options=info|critical|warning,default=critical"`
-	RecipientList         []Recipient `json:"recipientList,omitempty" norman:"required"`
+	Recipients            []Recipient `json:"recipients,omitempty" norman:"required"`
 	InitialWaitSeconds    int         `json:"initialWaitSeconds,omitempty" norman:"required,default=180,min=0"`
 	RepeatIntervalSeconds int         `json:"repeatIntervalSeconds,omitempty"  norman:"required,default=3600,min=0"`
 }
