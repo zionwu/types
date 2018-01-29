@@ -70,7 +70,7 @@ type Recipient struct {
 type TargetNode struct {
 	ID            string            `json:"id,omitempty"`
 	Selector      map[string]string `json:"selector,omitempty"`
-	IsReady       bool              `json:"isReady,omitempty"`
+	Condition     string            `json:"condition,omitempty" norman:"required,options=notready|disk|mem|cpu,default=notready"`
 	DiskThreshold int               `json:"diskThreshold,omitempty" norman:"min=1,max=100"`
 	MemThreshold  int               `json:"memThreshold,omitempty" norman:"min=1,max=100"`
 	CPUThreshold  int               `json:"cpuThreshold,omitempty" norman:"min=1"`
@@ -78,8 +78,7 @@ type TargetNode struct {
 
 type TargetPod struct {
 	ID           string `json:"id,omitempty" norman:"required"`
-	IsRunning    bool   `json:"isRunning,omitempty"`
-	IsScheduled  bool   `json:"isScheduled,omitempty"`
+	Condition    string `json:"condition,omitempty" norman:"required,options=notrunning|notscheduled|restarts,default=notrunning"`
 	RestartTimes int    `json:"restartTimes,omitempty" norman:"min=1"`
 }
 
@@ -90,7 +89,7 @@ type TargetWorkload struct {
 }
 
 type TargetSystemService struct {
-	Type string `json:"type,omitempty" norman:"required,options=dns|etcd|controller manager|network|scheduler,default=scheduler"`
+	Condition string `json:"condition,omitempty" norman:"required,options=dns|etcd|controller manager|network|scheduler,default=scheduler"`
 }
 
 type AlertStatus struct {
