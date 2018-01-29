@@ -95,7 +95,7 @@ type TargetSystemService struct {
 
 type AlertStatus struct {
 	StartedAt string `json:"startedAt,omitempty"`
-	State     string `json:"state,omitempty"`
+	State     string `json:"state,omitempty`
 
 	Conditions []AlertCondition `json:"conditions,omitempty"`
 }
@@ -155,7 +155,8 @@ type SmtpConfig struct {
 }
 
 type SlackConfig struct {
-	URL string `json:"url,omitempty" norman:"required"`
+	Channel string `json:"channel,omitempty" norman:"required"`
+	URL     string `json:"url,omitempty" norman:"required"`
 }
 
 type PagerdutyConfig struct {
