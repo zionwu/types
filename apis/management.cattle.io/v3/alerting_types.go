@@ -94,7 +94,7 @@ type TargetSystemService struct {
 
 type AlertStatus struct {
 	StartedAt string `json:"startedAt,omitempty"`
-	State     string `json:"state,omitempty`
+	State     string `json:"state,omitempty" norman:"required,options=active|inactive|alerting|muted,default=notready"`
 
 	Conditions []AlertCondition `json:"conditions,omitempty"`
 }
