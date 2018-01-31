@@ -1,12 +1,10 @@
 package client
 
 const (
-	ZookeeperType      = "zookeeper"
-	ZookeeperFieldHost = "host"
-	ZookeeperFieldPort = "port"
+	ZookeeperType          = "zookeeper"
+	ZookeeperFieldEndpoint = "endpoint"
 )
 
 type Zookeeper struct {
-	Host string `json:"host,omitempty"`
-	Port *int64 `json:"port,omitempty"`
+	Endpoint string `json:"endpoint,omitempty"`
 }

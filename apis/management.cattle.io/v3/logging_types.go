@@ -95,11 +95,9 @@ type ElasticsearchConfig struct {
 }
 
 type SplunkConfig struct {
-	Host      string `json:"host,omitempty" norman:"required"`
-	Port      int    `json:"port,omitempty" norman:"required,default=8088,min=1,max=65535"`
-	EnableTLS bool   `json:"enableTLS,omitempty" norman:"default=false"`
-	Source    string `json:"source,omitempty"`
-	Token     string `json:"token,omitempty" norman:"required"` //secret
+	Endpoint string `json:"endpoint,omitempty" norman:"required"`
+	Source   string `json:"source,omitempty"`
+	Token    string `json:"token,omitempty" norman:"required"` //secret
 }
 
 type EmbeddedConfig struct {
@@ -116,8 +114,7 @@ type KafkaConfig struct {
 }
 
 type Zookeeper struct {
-	Host string `json:"host,omitempty"`
-	Port int    `json:"port,omitempty" norman:"default=2181,min=1,max=65535"`
+	Endpoint string `json:"endpoint,omitempty" norman:"required"`
 }
 
 type BrokerList struct {
@@ -125,8 +122,7 @@ type BrokerList struct {
 }
 
 type SyslogConfig struct {
-	Host     string `json:"host,omitempty" norman:"required"`
-	Port     int    `json:"port,omitempty" norman:"required,default=51400,min=1,max=65535"`
+	Endpoint string `json:"endpoint,omitempty" norman:"required"`
 	Severity string `json:"severity,omitempty" norman:"default=notice,type=enum,options=emerg|alert|crit|err|warning|notice|info|debug"`
 	Program  string `json:"program,omitempty"`
 }
