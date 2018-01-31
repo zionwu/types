@@ -106,19 +106,9 @@ type EmbeddedConfig struct {
 }
 
 type KafkaConfig struct {
-	Zookeeper      *Zookeeper  `json:"zookeeper,omitempty"`
-	Broker         *BrokerList `json:"broker,omitempty"`
-	Topic          string      `json:"topic,omitempty" norman:"required"`
-	DataType       string      `json:"dataType,omitempty" norman:"required,type=enum,options=json|ltsv|msgpack,default=json"`
-	MaxSendRetries int         `json:"maxSendRetries,omitempty" norman:"default=3"`
-}
-
-type Zookeeper struct {
-	Endpoint string `json:"endpoint,omitempty" norman:"required"`
-}
-
-type BrokerList struct {
-	BrokerList []string `json:"brokerList,omitempty"`
+	ZookeeperEndpoint string `json:"zookeeperEndpoint,omitempty"`
+	BrokerEndpoints   string `json:"brokerEndpoints,omitempty"`
+	Topic             string `json:"topic,omitempty" norman:"required"`
 }
 
 type SyslogConfig struct {
