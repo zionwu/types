@@ -89,7 +89,7 @@ type TargetWorkload struct {
 }
 
 type TargetSystemService struct {
-	Condition string `json:"condition,omitempty" norman:"required,options=dns|etcd|controller manager|network|scheduler,default=scheduler"`
+	Condition string `json:"condition,omitempty" norman:"required,options=dns|etcd|controller-manager|network|scheduler,default=scheduler"`
 }
 
 type AlertStatus struct {
