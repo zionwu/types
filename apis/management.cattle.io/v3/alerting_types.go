@@ -61,10 +61,9 @@ type ProjectAlertSpec struct {
 }
 
 type Recipient struct {
-	CustomPagerDutyConfig *PagerdutyConfig `json:"customPagerdutyConfig,omitempty"`
-	CustomWebhookConfig   *WebhookConfig   `json:"customWebhookConfig,omitempty"`
-	Recipient             string           `json:"recipient,omitempty"`
-	NotifierId            string           `json:"notifierId,omitempty" norman:"type=reference[notifier]"`
+	Recipient    string `json:"recipient,omitempty"`
+	NotifierId   string `json:"notifierId,omitempty" norman:"required,type=reference[notifier]"`
+	NotifierType string `json:"notifierType,omitempty" norman:"required,options=slack|email|pagerduty|webhook"`
 }
 
 type TargetNode struct {
