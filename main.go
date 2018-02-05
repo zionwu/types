@@ -31,6 +31,8 @@ func main() {
 	})
 	generator.GenerateNativeTypes(v1beta2.SchemeGroupVersion, []interface{}{
 		v1beta2.Deployment{},
+		v1beta2.StatefulSet{},
+		v1beta2.DaemonSet{},
 	}, nil)
 	generator.GenerateNativeTypes(rbacv1.SchemeGroupVersion, []interface{}{
 		rbacv1.RoleBinding{},
