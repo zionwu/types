@@ -144,6 +144,14 @@ type NotifierSpec struct {
 	WebhookConfig   *WebhookConfig   `json:"webhookConfig,omitempty"`
 }
 
+type Notification struct {
+	Message         string           `json:"message, omitempty"`
+	SmtpConfig      *SmtpConfig      `json:"smtpConfig,omitempty"`
+	SlackConfig     *SlackConfig     `json:"slackConfig,omitempty"`
+	PagerdutyConfig *PagerdutyConfig `json:"pagerdutyConfig,omitempty"`
+	WebhookConfig   *WebhookConfig   `json:"webhookConfig,omitempty"`
+}
+
 type SmtpConfig struct {
 	Host             string `json:"host,omitempty" norman:"required,type=dnsLabel"`
 	Port             int    `json:"port,omitempty" norman:"required,min=1,max=65535"`
