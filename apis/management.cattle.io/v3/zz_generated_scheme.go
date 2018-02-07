@@ -91,6 +91,12 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&ListenConfigList{},
 		&Setting{},
 		&SettingList{},
+		&Notifier{},
+		&NotifierList{},
+		&ClusterAlert{},
+		&ClusterAlertList{},
+		&ProjectAlert{},
+		&ProjectAlertList{},
 	)
 	return nil
 }
