@@ -69,7 +69,7 @@ type Recipient struct {
 type TargetNode struct {
 	ID            string            `json:"id,omitempty"`
 	Selector      map[string]string `json:"selector,omitempty"`
-	Condition     string            `json:"condition,omitempty" norman:"required,options=notready|disk|mem|cpu,default=notready"`
+	Condition     string            `json:"condition,omitempty" norman:"required,options=notready|mem|cpu,default=notready"`
 	DiskThreshold int               `json:"diskThreshold,omitempty" norman:"min=1,max=100"`
 	MemThreshold  int               `json:"memThreshold,omitempty" norman:"min=1,max=100"`
 	CPUThreshold  int               `json:"cpuThreshold,omitempty" norman:"min=1"`
@@ -90,7 +90,7 @@ type TargetWorkload struct {
 }
 
 type TargetSystemService struct {
-	Condition string `json:"condition,omitempty" norman:"required,options=dns|etcd|controller-manager|network|scheduler,default=scheduler"`
+	Condition string `json:"condition,omitempty" norman:"required,options=etcd|controller-manager|scheduler,default=scheduler"`
 }
 
 type AlertStatus struct {
@@ -155,7 +155,7 @@ type Notification struct {
 
 type SmtpConfig struct {
 	Host             string `json:"host,omitempty" norman:"required,type=dnsLabel"`
-	Port             int    `json:"port,omitempty" norman:"required,min=1,max=65535"`
+	Port             int    `json:"port,omitempty" norman:"required,min=1,max=65535,default=465"`
 	Username         string `json:"username,omitempty" norman:"required"`
 	Password         string `json:"password,omitempty" norman:"required"`
 	DefaultRecipient string `json:"defaultRecipient,omitempty" norman:"required"`
