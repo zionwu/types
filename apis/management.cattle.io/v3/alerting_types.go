@@ -76,8 +76,8 @@ type TargetNode struct {
 type TargetPod struct {
 	ID                     string `json:"id,omitempty" norman:"required"`
 	Condition              string `json:"condition,omitempty" norman:"required,options=notrunning|notscheduled|restarts,default=notrunning"`
-	RestartTimes           int    `json:"restartTimes,omitempty" norman:"min=1,default=3"`
-	RestartIntervalSeconds int    `json:"restartIntervalSeconds,omitempty" norman:"min=1"`
+	RestartTimes           int    `json:"restartTimes,omitempty" norman:"min=1"`
+	RestartIntervalSeconds int    `json:"restartIntervalSeconds,omitempty"  norman:"min=1"`
 }
 
 type TargetEvent struct {
@@ -89,7 +89,7 @@ type TargetWorkload struct {
 	ID                    string            `json:"id,omitempty"`
 	Type                  string            `json:"type,omitempty" norman:"required,options=deployment|statefulset|daemonset,default=deployment"`
 	Selector              map[string]string `json:"selector,omitempty"`
-	UnavailablePercentage int               `json:"unavailablePercentage,omitempty" norman:"required,min=1,max=100,default=30"`
+	UnavailablePercentage int               `json:"unavailablePercentage,omitempty" norman:"required,min=1,max=100"`
 }
 
 type TargetSystemService struct {
