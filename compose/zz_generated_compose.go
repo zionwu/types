@@ -50,6 +50,7 @@ type Config struct {
 	SourceCodeRepositorys                    map[string]managementClient.SourceCodeRepository                    `json:"sourceCodeRepositories,omitempty" yaml:"sourceCodeRepositories,omitempty"`
 	GlobalComposeConfigs                     map[string]managementClient.GlobalComposeConfig                     `json:"globalComposeConfigs,omitempty" yaml:"globalComposeConfigs,omitempty"`
 	ClusterComposeConfigs                    map[string]managementClient.ClusterComposeConfig                    `json:"clusterComposeConfigs,omitempty" yaml:"clusterComposeConfigs,omitempty"`
+	ClusterRegistrys                         map[string]managementClient.ClusterRegistry                         `json:"clusterRegistries,omitempty" yaml:"clusterRegistries,omitempty"`
 
 	// Cluster Client
 	Namespaces        map[string]clusterClient.Namespace        `json:"namespaces,omitempty" yaml:"namespaces,omitempty"`

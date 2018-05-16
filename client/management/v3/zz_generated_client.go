@@ -50,6 +50,7 @@ type Client struct {
 	SourceCodeRepository                    SourceCodeRepositoryOperations
 	GlobalComposeConfig                     GlobalComposeConfigOperations
 	ClusterComposeConfig                    ClusterComposeConfigOperations
+	ClusterRegistry                         ClusterRegistryOperations
 }
 
 func NewClient(opts *clientbase.ClientOpts) (*Client, error) {
@@ -105,6 +106,7 @@ func NewClient(opts *clientbase.ClientOpts) (*Client, error) {
 	client.SourceCodeRepository = newSourceCodeRepositoryClient(client)
 	client.GlobalComposeConfig = newGlobalComposeConfigClient(client)
 	client.ClusterComposeConfig = newClusterComposeConfigClient(client)
+	client.ClusterRegistry = newClusterRegistryClient(client)
 
 	return client, nil
 }

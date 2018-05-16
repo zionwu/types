@@ -58,6 +58,7 @@ type Interface interface {
 	SourceCodeRepositoriesGetter
 	GlobalComposeConfigsGetter
 	ClusterComposeConfigsGetter
+	ClusterRegistriesGetter
 }
 
 type Client struct {
@@ -108,6 +109,7 @@ type Client struct {
 	sourceCodeRepositoryControllers                    map[string]SourceCodeRepositoryController
 	globalComposeConfigControllers                     map[string]GlobalComposeConfigController
 	clusterComposeConfigControllers                    map[string]ClusterComposeConfigController
+	clusterRegistryControllers                         map[string]ClusterRegistryController
 }
 
 func NewForConfig(config rest.Config) (Interface, error) {
@@ -167,6 +169,7 @@ func NewForConfig(config rest.Config) (Interface, error) {
 		sourceCodeRepositoryControllers:                    map[string]SourceCodeRepositoryController{},
 		globalComposeConfigControllers:                     map[string]GlobalComposeConfigController{},
 		clusterComposeConfigControllers:                    map[string]ClusterComposeConfigController{},
+		clusterRegistryControllers:                         map[string]ClusterRegistryController{},
 	}, nil
 }
 
@@ -735,6 +738,19 @@ type ClusterComposeConfigsGetter interface {
 func (c *Client) ClusterComposeConfigs(namespace string) ClusterComposeConfigInterface {
 	objectClient := objectclient.NewObjectClient(namespace, c.restClient, &ClusterComposeConfigResource, ClusterComposeConfigGroupVersionKind, clusterComposeConfigFactory{})
 	return &clusterComposeConfigClient{
+		ns:           namespace,
+		client:       c,
+		objectClient: objectClient,
+	}
+}
+
+type ClusterRegistriesGetter interface {
+	ClusterRegistries(namespace string) ClusterRegistryInterface
+}
+
+func (c *Client) ClusterRegistries(namespace string) ClusterRegistryInterface {
+	objectClient := objectclient.NewObjectClient(namespace, c.restClient, &ClusterRegistryResource, ClusterRegistryGroupVersionKind, clusterRegistryFactory{})
+	return &clusterRegistryClient{
 		ns:           namespace,
 		client:       c,
 		objectClient: objectClient,

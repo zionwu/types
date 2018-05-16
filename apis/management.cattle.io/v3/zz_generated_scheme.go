@@ -119,6 +119,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&GlobalComposeConfigList{},
 		&ClusterComposeConfig{},
 		&ClusterComposeConfigList{},
+		&ClusterRegistry{},
+		&ClusterRegistryList{},
 	)
 	return nil
 }
